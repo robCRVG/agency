@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Case Agência Bancária</title>
+</head>
+    <body>
+        <h1>Acesso</h1>
+        <form th:action="@{/login}" th:object="${userAgency}" method="post">
+            <label>Titular:</label>
+            <input type="text" name="nameUser" th:field="*{nameUser}" />
+            <label>Senha:</label>
+            <input type="password" name="password" th:text="${password}" />
+            <button type="submit">Acessar área do usuário</button>
+        </form>
+
+        <label>
+            <a th:href="@{/registerUser}">Registrar</a>
+        </label>
+
+    </body>
+</html>

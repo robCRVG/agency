@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Case Agência Bancária</title>
+</head>
+<body>
+    <h1>Registrar Conta</h1>
+    <div th:if="${mensagem}">
+        <span th:text="${mensagem}"></span>
+    </div>
+    <form th:action="@{/registerAccountCustomer}" th:object="${account}" method="post">
+        <div>
+            <label>Número Conta:</label>
+            <input type="text" th:field="*{accountNumber}">
+<!--            <span th:if="${#fields.hasErrors(accountNumber)}" th:errors="*{accountNumber}"> </span>-->
+        </div>
+        <div>
+            <label>Cliente:</label>
+            <div>
+                <th:block th:each="user : ${userAgencyList}">
+                    <input type="checkbox" th:text="${user.nameUser}" th:value="${user.id}" th:field="*{accountCustomer}">
+                </th:block>
+            </div>
+<!--            <span th:if="${#fields.hasErrors(accountHolder)}" th:errors="*{accountHolder}"> </span>-->
+        </div>
+        <div>
+            <label>Saldo:</label>
+            <input  type="text" th:field="*{balance}">
+<!--            <span th:if="${#fields.hasErrors(balance)}" th:errors="*{balance}"> </span>-->
+        </div>
+        <div>
+            <button type="submit">Registrar</button>
+        </div>
+
+    </form>
+
+</body>
+</html>
