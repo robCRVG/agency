@@ -9,28 +9,25 @@
     <div th:if="${mensagem}">
         <span th:text="${mensagem}"></span>
     </div>
-    <form th:action="@{/registerAccountCustomer}" th:object="${account}" method="post">
+    <form th:action="@{/registerAccount}" th:object="${account}" method="post">
         <div>
-            <label>Número Conta:</label>
+            <label style="font-weight: bold">Número Conta:</label>
             <input type="text" th:field="*{accountNumber}">
-<!--            <span th:if="${#fields.hasErrors(accountNumber)}" th:errors="*{accountNumber}"> </span>-->
         </div>
         <div>
-            <label>Cliente:</label>
+            <label style="font-weight: bold">Cliente:</label>
             <div>
                 <th:block th:each="user : ${userAgencyList}">
-                    <input type="checkbox" th:text="${user.nameUser}" th:value="${user.id}" th:field="*{accountCustomer}">
+                    <input type="checkbox" th:text="${user.nameUser}" th:value="${user.id}" th:field="*{userAgency}">
                 </th:block>
             </div>
-<!--            <span th:if="${#fields.hasErrors(accountHolder)}" th:errors="*{accountHolder}"> </span>-->
         </div>
         <div>
-            <label>Saldo:</label>
+            <label style="font-weight: bold">Saldo:</label>
             <input  type="text" th:field="*{balance}">
-<!--            <span th:if="${#fields.hasErrors(balance)}" th:errors="*{balance}"> </span>-->
         </div>
         <div>
-            <button type="submit">Registrar</button>
+            <button style="font-weight: bold" type="submit">Registrar</button>
         </div>
 
     </form>

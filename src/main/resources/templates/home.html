@@ -7,16 +7,16 @@
     <body>
         <h1>Acesso</h1>
         <form th:action="@{/login}" th:object="${userAgency}" method="post">
-            <label>Titular:</label>
+            <label style="font-weight: bold">Titular:</label>
             <input type="text" name="nameUser" th:field="*{nameUser}" />
-            <label>Senha:</label>
+            <label style="font-weight: bold">Senha:</label>
             <input type="password" name="password" th:text="${password}" />
-            <button type="submit">Acessar área do usuário</button>
+            <button style="font-weight: bold" type="submit">Acessar área do usuário</button>
         </form>
 
-        <label>
-            <a th:href="@{/registerUser}">Registrar</a>
-        </label>
+        <div>
+            <a style="font-weight: bold" th:href="@{/registerUser}">Registrar</a>
+        </div>
 
     </body>
 </html>

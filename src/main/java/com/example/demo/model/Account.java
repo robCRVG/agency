@@ -14,7 +14,7 @@ public class Account {
     private Long accountNumber;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private UserAgency accountCustomer;
+    private UserAgency userAgency;
 
     private Double balance;
 
@@ -34,12 +34,12 @@ public class Account {
         this.accountNumber = accountNumber;
     }
 
-    public UserAgency getAccountCustomer() {
-        return accountCustomer;
+    public UserAgency getUserAgency() {
+        return userAgency;
     }
 
-    public void setAccountCustomer(UserAgency accountCustomer) {
-        this.accountCustomer = accountCustomer;
+    public void setUserAgency(UserAgency userAgency) {
+        this.userAgency = userAgency;
     }
 
     public Double getBalance() {

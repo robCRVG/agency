@@ -6,7 +6,28 @@
 </head>
 <body>
     <h1>Operaçõs da conta</h1>
+    <div>
+        <label style="font-weight: bold">Titular:</label>
+        <label type="text"  th:text="${userAgency.nameUser}"></label>
+    </div>
+    <div>
+        <label style="font-weight: bold">Saldo:</label>
+        <label type="text"  th:text="${account.balance}"></label>
+    </div>
+    <div>
+        <label style="font-weight: bold">Operações:</label>
+    </div>
+    <div>
+        <div>
+            <a style="font-weight: bold" th:href="@{/deposit}">Depositar</a>
+        </div>
+        <div>
+            <a style="font-weight: bold" th:href="@{/withdraw}">Sacar</a>
+        </div>
+        <div>
+            <a style="font-weight: bold" th:href="@{/transfer}">Transferir</a>
+        </div>
+    </div>
 
-    <label>Saldo</label>
 </body>
 </html>
