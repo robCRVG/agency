@@ -10,13 +10,22 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "O número da conta deve ser informada")
+    @NotNull(message = "O número da conta deve ser informada!")
     private Long accountNumber;
+
+    @NotNull(message = "O saldo deve ser informado!")
+    private Double balance;
 
     @OneToOne(cascade = CascadeType.ALL)
     private UserAgency userAgency;
 
-    private Double balance;
+    @Transient
+    private Long accountDestination;
+
+    @Transient
+    private Double valueTransfer;
+
+    public Account() {}
 
     public Long getId() {
         return id;
@@ -48,5 +57,21 @@ public class Account {
 
     public void setBalance(Double balance) {
         this.balance = balance;
+    }
+
+    public Long getAccountDestination() {
+        return accountDestination;
+    }
+
+    public void setAccountDestination(Long accountDestination) {
+        this.accountDestination = accountDestination;
+    }
+
+    public Double getValueTransfer() {
+        return valueTransfer;
+    }
+
+    public void setValueTransfer(Double valueTransfer) {
+        this.valueTransfer = valueTransfer;
     }
 }

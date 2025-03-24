@@ -6,26 +6,51 @@
 </head>
 <body>
     <h1>Operaçõs da conta</h1>
-    <div>
-        <label style="font-weight: bold">Titular:</label>
-        <label type="text"  th:text="${userAgency.nameUser}"></label>
-    </div>
-    <div>
-        <label style="font-weight: bold">Saldo:</label>
-        <label type="text"  th:text="${account.balance}"></label>
-    </div>
-    <div>
-        <label style="font-weight: bold">Operações:</label>
-    </div>
-    <div>
+
         <div>
-            <a style="font-weight: bold" th:href="@{/deposit}">Depositar</a>
+            <label style="font-weight: bold">Titular:</label>
+            <label type="text" th:text="${userAgency.nameUser}"></label>
         </div>
         <div>
-            <a style="font-weight: bold" th:href="@{/withdraw}">Sacar</a>
+            <label style="font-weight: bold">Saldo:</label>
+            <label type="text" th:text="${account.balance}"></label>
         </div>
         <div>
-            <a style="font-weight: bold" th:href="@{/transfer}">Transferir</a>
+            <label style="font-weight: bold">Operações:</label>
+        </div>
+    <form id="formDeposit" th:action="@{/deposit}" th:object="${account}" method="post">
+            <div>
+                <div hidden="hidden">
+                    <input type="text" th:text="${account.id}" th:value="${account.id}" th:field="*{id}">
+                    <input type="text" th:text="${account.accountNumber}" th:value="${account.accountNumber}" th:field="*{accountNumber}">
+                    <input type="text" th:text="${account.userAgency}" th:value="${account.userAgency}" th:field="*{userAgency}">
+                </div>
+                <button style="font-weight: bold">Depositar</button>
+            </div>
+    </form>
+    <div>
+        <form id="formWithdraw" th:action="@{/withdraw}" th:object="${account}" method="post">
+            <div>
+                <div hidden="hidden">
+                    <input type="text" th:text="${account.id}" th:value="${account.id}" th:field="*{id}">
+                    <input type="text" th:text="${account.accountNumber}" th:value="${account.accountNumber}" th:field="*{accountNumber}">
+                    <input type="text" th:text="${account.userAgency}" th:value="${account.userAgency}" th:field="*{userAgency}">
+                </div>
+                <button style="font-weight: bold">Sacar</button>
+            </div>
+        </form>
+        <div>
+            <form id="formTransfer" th:action="@{/transfer}" th:object="${account}" method="post">
+                <div>
+                    <div hidden="hidden">
+                        <input type="text" th:text="${account.id}" th:value="${account.id}" th:field="*{id}">
+                        <input type="text" th:text="${account.accountNumber}" th:value="${account.accountNumber}" th:field="*{accountNumber}">
+                        <input type="text" th:text="${account.balance}" th:value="${account.balance}" th:field="*{balance}">
+                        <input type="text" th:text="${account.userAgency}" th:value="${account.userAgency}" th:field="*{userAgency}">
+                    </div>
+                    <button style="font-weight: bold">Transferir</button>
+                </div>
+            </form>
         </div>
     </div>
 

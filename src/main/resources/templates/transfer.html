@@ -6,5 +6,28 @@
 </head>
 <body>
     <h1>Transferir</h1>
+    <form th:action="@{/transferValue}" th:object="${account}" method="post">
+        <div>
+            <div>
+                <label  style="font-weight: bold">Valor do transferência:</label>
+            </div>
+            <div>
+                <input type="text"  th:field="*{valueTransfer}">
+            </div>
+            <div>
+                <label  style="font-weight: bold">Conta destino:</label>
+            </div>
+            <div>
+                <input type="text"  th:field="*{accountDestination}">
+            </div>
+            <div hidden="hidden">
+                <input type="text" th:text="${account.id}" th:value="${account.id}" th:field="*{id}">
+                <input type="text" th:text="${account.accountNumber}" th:value="${account.accountNumber}" th:field="*{accountNumber}">
+                <input type="text" th:text="${account.balance}" th:value="${account.balance}" th:field="*{balance}">
+                <input type="text" th:text="${account.userAgency}" th:value="${account.userAgency}" th:field="*{userAgency}">
+            </div>
+            <button type="submit" style="font-weight: bold">Transferir</button>
+        </div>
+    </form>
 </body>
 </html>

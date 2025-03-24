@@ -5,7 +5,24 @@
     <title>Case Agência Bancária</title>
 </head>
 <body>
-    <h1>Sacar</h1>
+<h1>Sacar</h1>
+<form th:action="@{/withdrawBalance}" th:object="${account}" method="post">
+    <div>
+        <div>
+            <label  style="font-weight: bold">Valor do saque:</label>
+        </div>
+        <div>
+            <input type="text"  th:field="*{balance}">
+        </div>
+        <div hidden="hidden">
+            <input type="text" th:text="${account.id}" th:value="${account.id}" th:field="*{id}">
+            <input type="text" th:text="${account.accountNumber}" th:value="${account.accountNumber}" th:field="*{accountNumber}">
+            <input type="text" th:text="${account.balance}" th:value="${account.balance}" th:field="*{balance}">
+            <input type="text" th:text="${account.userAgency}" th:value="${account.userAgency}" th:field="*{userAgency}">
+        </div>
+        <button type="submit" style="font-weight: bold">Sacar</button>
+    </div>
+</form>
 
 </body>
 </html>
