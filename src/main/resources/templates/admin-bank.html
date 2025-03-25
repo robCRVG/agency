@@ -1,36 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Case Agência Bancária</title>
-</head>
-<body>
-    <h1>Registrar Conta</h1>
-    <div th:if="${mensagem}">
-        <span th:text="${mensagem}"></span>
-    </div>
-    <form th:action="@{/registerAccount}" th:object="${account}" method="post">
-        <div>
-            <label style="font-weight: bold">Número Conta:</label>
-            <input type="text" th:field="*{accountNumber}">
+    <head>
+        <meta charset="UTF-8">
+        <title>Case Agência Bancária</title>
+    </head>
+    <body>
+        <h1>Registrar Conta</h1>
+        <div th:if="${mensagem}">
+            <span th:text="${mensagem}"></span>
         </div>
-        <div>
-            <label style="font-weight: bold">Cliente:</label>
+        <form th:action="@{/registerAccount}" th:object="${account}" method="post">
             <div>
-                <th:block th:each="user : ${userAgencyList}">
-                    <input type="checkbox" th:text="${user.nameUser}" th:value="${user.id}" th:field="*{userAgency}">
-                </th:block>
+                <label style="font-weight: bold">Número Conta:</label>
+                <input type="text" th:field="*{accountNumber}">
             </div>
-        </div>
+            <div>
+                <label style="font-weight: bold">Cliente:</label>
+                <div>
+                    <th:block th:each="user : ${userAgencyList}">
+                        <input type="checkbox" th:text="${user.nameUser}" th:value="${user.id}" th:field="*{userAgency}">
+                    </th:block>
+                </div>
+            </div>
+            <div>
+                <label style="font-weight: bold">Saldo:</label>
+                <input  type="text" th:field="*{balance}">
+            </div>
+            <div>
+                <button style="font-weight: bold" type="submit">Registrar</button>
+            </div>
+        </form>
         <div>
-            <label style="font-weight: bold">Saldo:</label>
-            <input  type="text" th:field="*{balance}">
+            <a th:href="@{/home}">Página inicial</a>
         </div>
-        <div>
-            <button style="font-weight: bold" type="submit">Registrar</button>
-        </div>
-
-    </form>
-
-</body>
+    </body>
 </html>

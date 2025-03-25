@@ -1,37 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Case Agência Bancária</title>
-</head>
-<body>
-<h1>Registrar Usuário</h1>
-<div th:if="${mensagem}">
-    <span th:text="${mensagem}"></span>
-</div>
-<form th:action="@{/register}" th:object="${userAgency}" method="post">
+    <head>
+        <meta charset="UTF-8">
+        <title>Case Agência Bancária</title>
+    </head>
+    <body>
+        <h1>Registrar Usuário</h1>
+        <div th:if="${mensagem}">
+        <span th:text="${mensagem}"></span>
+        </div>
+        <form th:action="@{/register}" th:object="${userAgency}" method="post">
+            <div>
+                <label>Nome Usuário:</label>
+                <input type="text"  th:field="*{nameUser}">
+        <!--        <span th:if="${#fields.hasErrors(nameUser)}" th:errors="*{nameUser}"> </span>-->
+            </div>
+            <div>
+                <label>Senha:</label>
+                <input  type="text" th:field="*{password}">
+        <!--        <span th:if="${#fields.hasErrors(password)}" th:errors="*{password}"> </span>-->
+            </div>
+            <div>
+                <label>Admin Bancário:</label>
+                <input type="checkbox" name="admin" th:checked="*{admin}">
+            </div>
+            <div>
+                <label>Cliente:</label>
+                <input type="checkbox" name="customer" th:checked="*{customer}">
+            </div>
+            <div>
+                <button type="submit">Registrar</button>
+            </div>
+        </form>
     <div>
-        <label>Nome Usuário:</label>
-        <input type="text"  th:field="*{nameUser}">
-<!--        <span th:if="${#fields.hasErrors(nameUser)}" th:errors="*{nameUser}"> </span>-->
+        <a th:href="@{/home}">Página inicial</a>
     </div>
-    <div>
-        <label>Senha:</label>
-        <input  type="text" th:field="*{password}">
-<!--        <span th:if="${#fields.hasErrors(password)}" th:errors="*{password}"> </span>-->
-    </div>
-    <div>
-        <label>Admin Bancário:</label>
-        <input type="checkbox" name="admin" th:checked="*{admin}">
-    </div>
-    <div>
-        <label>Cliente:</label>
-        <input type="checkbox" name="customer" th:checked="*{customer}">
-    </div>
-    <div>
-        <button type="submit">Registrar</button>
-    </div>
-
-</form>
-</body>
+    </body>
 </html>

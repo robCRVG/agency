@@ -24,9 +24,4 @@ public class UserService {
     public List<UserAgency> findUserByCustomer(Boolean customer){
         return userRepository.findAllByCustomer(customer);
     }
-
-    public UserAgency findUserAgenciesById(Long id){
-        return userRepository.findUserAgenciesById(id);
-    }
-
 }

@@ -1,28 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Case Agência Bancária</title>
-</head>
-<body>
-<h1>Sacar</h1>
-<form th:action="@{/withdrawBalance}" th:object="${account}" method="post">
-    <div>
+    <head>
+        <meta charset="UTF-8">
+        <title>Case Agência Bancária</title>
+    </head>
+    <body>
+        <h1>Sacar</h1>
+        <div th:if="${mensagem}">
+            <button type="button" class="close-button">
+                <span th:text="${mensagem}"></span>
+            </button>
+        </div>
+        <form th:action="@{/withdrawBalance}" th:object="${account}" method="post">
+            <div>
+                <div>
+                    <label  style="font-weight: bold">Valor do saque:</label>
+                </div>
+                <div>
+                    <input type="text"  th:field="*{balance}">
+                </div>
+                <div hidden="hidden">
+                    <input type="text" th:text="${account.id}" th:value="${account.id}" th:field="*{id}">
+                    <input type="text" th:text="${account.accountNumber}" th:value="${account.accountNumber}" th:field="*{accountNumber}">
+                    <input type="text" th:text="${account.balance}" th:value="${account.balance}" th:field="*{balance}">
+                    <input type="text" th:text="${account.userAgency}" th:value="${account.userAgency}" th:field="*{userAgency}">
+                </div>
+                <button type="submit" style="font-weight: bold">Sacar</button>
+            </div>
+        </form>
         <div>
-            <label  style="font-weight: bold">Valor do saque:</label>
+            <a th:href="@{/home}">Página inicial</a>
         </div>
-        <div>
-            <input type="text"  th:field="*{balance}">
-        </div>
-        <div hidden="hidden">
-            <input type="text" th:text="${account.id}" th:value="${account.id}" th:field="*{id}">
-            <input type="text" th:text="${account.accountNumber}" th:value="${account.accountNumber}" th:field="*{accountNumber}">
-            <input type="text" th:text="${account.balance}" th:value="${account.balance}" th:field="*{balance}">
-            <input type="text" th:text="${account.userAgency}" th:value="${account.userAgency}" th:field="*{userAgency}">
-        </div>
-        <button type="submit" style="font-weight: bold">Sacar</button>
-    </div>
-</form>
-
-</body>
+    </body>
 </html>

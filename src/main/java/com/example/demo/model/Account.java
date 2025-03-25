@@ -25,8 +25,6 @@ public class Account {
     @Transient
     private Double valueTransfer;
 
-    public Account() {}
-
     public Long getId() {
         return id;
     }
@@ -43,20 +41,20 @@ public class Account {
         this.accountNumber = accountNumber;
     }
 
-    public UserAgency getUserAgency() {
-        return userAgency;
-    }
-
-    public void setUserAgency(UserAgency userAgency) {
-        this.userAgency = userAgency;
-    }
-
     public Double getBalance() {
         return balance;
     }
 
     public void setBalance(Double balance) {
         this.balance = balance;
+    }
+
+    public UserAgency getUserAgency() {
+        return userAgency;
+    }
+
+    public void setUserAgency(UserAgency userAgency) {
+        this.userAgency = userAgency;
     }
 
     public Long getAccountDestination() {

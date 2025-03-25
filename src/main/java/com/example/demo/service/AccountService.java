@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.model.Account;
 import com.example.demo.model.UserAgency;
 import com.example.demo.repository.AccountRepository;
+import jakarta.persistence.OptimisticLockException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,30 +14,43 @@ public class AccountService {
     private AccountRepository accountRepository;
 
     public Account saveAccount(Account account) {
-        return this.accountRepository.save(account);
+        try{
+            return accountRepository.save(account);
+        } catch (OptimisticLockException e){
+            throw new OptimisticLockException();
+        }
     }
 
     public Account updateAccount(Account account) {
-        return this.accountRepository.save(account);
+        try{
+            return this.accountRepository.save(account);
+        } catch (OptimisticLockException e){
+            throw new OptimisticLockException();
+        }
     }
 
     public Account finByUserAgency(UserAgency userAgency) {
-        return this.accountRepository.findByUserAgency(userAgency);
-    }
-
-    public void updateBalanceById(Double balance, Long id) {
-         this.accountRepository.updateBalanceById(balance, id);
-    }
-
-    public Double findBalanceById(Long id) {
-        return this.accountRepository.findBalanceById(id);
+        try{
+            return this.accountRepository.findByUserAgency(userAgency);
+        } catch (OptimisticLockException e){
+            throw new OptimisticLockException();
+        }
     }
 
     public Account findAccountById(Long id) {
-        return this.accountRepository.findAccountById(id);
+        try{
+            return this.accountRepository.findAccountById(id);
+        } catch (OptimisticLockException e){
+            throw new OptimisticLockException();
+        }
+
     }
 
     public Account findAccountByAccountNumber(Long accountNumber) {
-        return this.accountRepository.findAccountByAccountNumber(accountNumber);
+        try{
+            return this.accountRepository.findAccountByAccountNumber(accountNumber);
+        } catch (OptimisticLockException e){
+            throw new OptimisticLockException();
+        }
     }
 }

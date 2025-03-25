@@ -32,19 +32,34 @@ public class HomeController {
     @PostMapping("login")
     public ModelAndView login(@ModelAttribute("userAgency") UserAgency userAgency) {
         ModelAndView mv = new ModelAndView("home");
-        UserAgency objUserAgency = this.userService.findUserByPasswordAndNameUser(userAgency.getPassword(), userAgency.getNameUser());
-        if(objUserAgency.getAdmin()){
-            List<UserAgency> userAgencyList = this.userService.findUserByCustomer(Boolean.TRUE);
-            mv = new ModelAndView("admin-bank");
-            mv.addObject("account", new Account());
-            mv.addObject("userAgencyList", userAgencyList);
-        } else if(objUserAgency.getCustomer()){
-            Account objAccount = this.accountService.finByUserAgency(objUserAgency);
-            mv = new ModelAndView("account-operation");
-            mv.addObject("userAgency", objUserAgency);
-            mv.addObject("account", objAccount);
+        if(userAgency.getPassword().isEmpty() && userAgency.getNameUser().isEmpty()) {
+//            mv = new ModelAndView("home");
+            mv.addObject("mensagem", "Usuário não registrado!");
+            return mv;
+        } else {
+            UserAgency objUserAgency = this.userService.findUserByPasswordAndNameUser(userAgency.getPassword(), userAgency.getNameUser());
+            if(objUserAgency == null) {
+                mv.addObject("mensagem", "Usuário não registrado!");
+                return mv;
+            }else {
+                if(objUserAgency.getAdmin()){
+                    List<UserAgency> userAgencyList = this.userService.findUserByCustomer(Boolean.TRUE);
+                    mv = new ModelAndView("admin-bank");
+                    mv.addObject("account", new Account());
+                    mv.addObject("userAgencyList", userAgencyList);
+                } else if(objUserAgency.getCustomer()){
+                    Account objAccount = this.accountService.finByUserAgency(objUserAgency);
+                    if(objAccount == null) {
+                        mv.addObject("mensagem", "Conta não cadastrada!");
+                        return mv;
+                    }else{
+                        mv = new ModelAndView("account-operation");
+                        mv.addObject("userAgency", objUserAgency);
+                        mv.addObject("account", objAccount);
+                    }
+                }
+            }
         }
         return mv;
     }
-
 }

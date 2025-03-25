@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Case Agência Bancária</title>
-</head>
-<body>
-    <h1>Operaçõs da conta</h1>
-
+    <head>
+        <meta charset="UTF-8">
+        <title>Case Agência Bancária</title>
+    </head>
+    <body>
+        <h1>Operaçõs da conta</h1>
         <div>
             <label style="font-weight: bold">Titular:</label>
             <label type="text" th:text="${userAgency.nameUser}"></label>
@@ -18,27 +17,30 @@
         <div>
             <label style="font-weight: bold">Operações:</label>
         </div>
-    <form id="formDeposit" th:action="@{/deposit}" th:object="${account}" method="post">
-            <div>
-                <div hidden="hidden">
-                    <input type="text" th:text="${account.id}" th:value="${account.id}" th:field="*{id}">
-                    <input type="text" th:text="${account.accountNumber}" th:value="${account.accountNumber}" th:field="*{accountNumber}">
-                    <input type="text" th:text="${account.userAgency}" th:value="${account.userAgency}" th:field="*{userAgency}">
+        <div>
+            <form id="formDeposit" th:action="@{/deposit}" th:object="${account}" method="post">
+                    <div>
+                        <div hidden="hidden">
+                            <input type="text" th:text="${account.id}" th:value="${account.id}" th:field="*{id}">
+                            <input type="text" th:text="${account.accountNumber}" th:value="${account.accountNumber}" th:field="*{accountNumber}">
+                            <input type="text" th:text="${account.userAgency}" th:value="${account.userAgency}" th:field="*{userAgency}">
+                        </div>
+                        <button style="font-weight: bold">Depositar</button>
+                    </div>
+            </form>
+        </div>
+        <div>
+            <form id="formWithdraw" th:action="@{/withdraw}" th:object="${account}" method="post">
+                <div>
+                    <div hidden="hidden">
+                        <input type="text" th:text="${account.id}" th:value="${account.id}" th:field="*{id}">
+                        <input type="text" th:text="${account.accountNumber}" th:value="${account.accountNumber}" th:field="*{accountNumber}">
+                        <input type="text" th:text="${account.userAgency}" th:value="${account.userAgency}" th:field="*{userAgency}">
+                    </div>
+                    <button style="font-weight: bold">Sacar</button>
                 </div>
-                <button style="font-weight: bold">Depositar</button>
-            </div>
-    </form>
-    <div>
-        <form id="formWithdraw" th:action="@{/withdraw}" th:object="${account}" method="post">
-            <div>
-                <div hidden="hidden">
-                    <input type="text" th:text="${account.id}" th:value="${account.id}" th:field="*{id}">
-                    <input type="text" th:text="${account.accountNumber}" th:value="${account.accountNumber}" th:field="*{accountNumber}">
-                    <input type="text" th:text="${account.userAgency}" th:value="${account.userAgency}" th:field="*{userAgency}">
-                </div>
-                <button style="font-weight: bold">Sacar</button>
-            </div>
-        </form>
+            </form>
+        </div>
         <div>
             <form id="formTransfer" th:action="@{/transfer}" th:object="${account}" method="post">
                 <div>
@@ -52,7 +54,8 @@
                 </div>
             </form>
         </div>
-    </div>
-
-</body>
+        <div>
+            <a th:href="@{/home}">Página inicial</a>
+        </div>
+    </body>
 </html>

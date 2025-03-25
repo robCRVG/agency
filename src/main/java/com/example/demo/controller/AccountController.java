@@ -7,8 +7,6 @@ import com.example.demo.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -59,14 +57,20 @@ public class AccountController {
     }
 
     @PostMapping("withdrawBalance")
-    public ModelAndView withdrawBalance(@ModelAttribute("account")  Account account) {
+    public ModelAndView withdrawBalance(@ModelAttribute("account")  Account account, RedirectAttributes redirectAttributes) {
+        ModelAndView mv = new ModelAndView("withdraw");
         Account currentBalance = accountService.findAccountById(account.getId());
-        Double balanceUpdated = currentBalance.getBalance() - account.getBalance();
-        account.setBalance(balanceUpdated);
-        this.accountService.updateAccount(account);
-        ModelAndView mv = new ModelAndView("account-operation");
-        mv.addObject("account", account);
-        mv.addObject("userAgency", account.getUserAgency());
+        if (currentBalance.getBalance() < account.getBalance()) {
+            mv.addObject("mensagem", "Saldo infuficiente!");
+            return mv;
+        }else{
+            Double balanceUpdated = currentBalance.getBalance() - account.getBalance();
+            account.setBalance(balanceUpdated);
+            this.accountService.updateAccount(account);
+            mv = new ModelAndView("account-operation");
+            mv.addObject("account", account);
+            mv.addObject("userAgency", account.getUserAgency());
+        }
         return mv;
     }
 
@@ -79,15 +83,21 @@ public class AccountController {
 
     @PostMapping("transferValue")
     public ModelAndView transferValue(@ModelAttribute("account") Account account) {
+        ModelAndView mv = new ModelAndView("transfer");
         Double balanceUpdated = account.getBalance() - account.getValueTransfer();
-        account.setBalance(balanceUpdated);
-        this.accountService.updateAccount(account);
-        Account accountDestination = accountService.findAccountByAccountNumber(account.getAccountDestination());
-        accountDestination.setBalance(accountDestination.getBalance() + account.getValueTransfer());
-        this.accountService.updateAccount(accountDestination);
-        ModelAndView mv = new ModelAndView("account-operation");
-        mv.addObject("account", account);
-        mv.addObject("userAgency", account.getUserAgency());
+        if(account.getBalance() < account.getValueTransfer()){
+            mv.addObject("mensagem", "Saldo infuficiente!");
+            return mv;
+        } else{
+            account.setBalance(balanceUpdated);
+            this.accountService.updateAccount(account);
+            Account accountDestination = accountService.findAccountByAccountNumber(account.getAccountDestination());
+            accountDestination.setBalance(accountDestination.getBalance() + account.getValueTransfer());
+            this.accountService.updateAccount(accountDestination);
+            mv = new ModelAndView("account-operation");
+            mv.addObject("account", account);
+            mv.addObject("userAgency", account.getUserAgency());
+        }
         return mv;
     }
 }

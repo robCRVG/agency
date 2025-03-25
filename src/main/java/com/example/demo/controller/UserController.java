@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
-
 @Controller
 public class UserController {
 
@@ -23,7 +21,6 @@ public class UserController {
     @GetMapping("registerUser")
     public ModelAndView registerUser() {
         ModelAndView mv = new ModelAndView("register-user");
-//        List<UserAgency> users = userService.findUserByCustomer(Boolean.TRUE);
         mv.addObject("userAgency", new UserAgency());
         return mv;
     }
